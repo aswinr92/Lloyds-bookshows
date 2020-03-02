@@ -1,0 +1,20 @@
+.seat {
+  height: 30px;
+  width: 30px;
+  border: 1px solid black;
+  cursor: pointer;
+  margin: 20px;
+  text-align: center;
+  font-size: 14px;
+  line-height: 28px;
+  &.free {
+    background-color: white;
+  }
+  &.selected {
+    background-color: yellowgreen;
+  }
+  &.booked {
+    background-color: #696969;
+    color: white;
+  }
+}

@@ -1,0 +1,14 @@
+[
+  {
+    "name": "PVR Market City",
+    "timings": ["11:00 am", "1:30 pm", "6:30pm", "10:00pm"]
+  },
+  {
+    "name": "Forum Shantiniketan",
+    "timings": ["11:00 am", "1:30 pm", "6:30pm", "10:00pm"]
+  },
+  {
+    "name": "VR bengaluru",
+    "timings": ["11:00 am", "1:30 pm", "6:30pm", "10:00pm"]
+  }
+]

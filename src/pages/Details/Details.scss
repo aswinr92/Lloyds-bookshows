@@ -1,0 +1,46 @@
+@import "../../colors.scss";
+.details {
+  display: flex;
+  flex-direction: column;
+  background: white;
+  border-radius: 20px;
+  margin: 20px 40px;
+  color: $grey;
+  padding: 20px;
+  .meta {
+    border-bottom: 1px solid #dcdcdc;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    &__right {
+      margin-left: 20px;
+    }
+    &__title {
+      font-size: 20px;
+      color: $grey;
+      margin-bottom: 10px;
+    }
+    &__content {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    &__details {
+      font-size: 14px;
+    }
+    &__desc {
+      color: $grey;
+      font-size: 15px;
+      margin-bottom: 20px;
+    }
+  }
+  .theatres {
+    padding: 20px;
+    &__label {
+      font-weight: bold;
+      font-size: 16px;
+      margin-bottom: 5px;
+    }
+  }
+  .actions {
+    margin-top: 10px;
+  }
+}

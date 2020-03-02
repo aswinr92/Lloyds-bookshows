@@ -1,0 +1,35 @@
+@import "../../colors.scss";
+.accordion {
+  padding: 10px 20px;
+  display: flex;
+  align-items: baseline;
+  .icon {
+    font-size: 20px;
+    width: 25px;
+    cursor: pointer;
+  }
+  .title {
+    color: $grey;
+    font-size: 16px;
+    cursor: pointer;
+    &.selected {
+      color: blue;
+    }
+  }
+  .timings {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+  }
+  .time__button {
+    color: blue;
+    border: 1px solid blue;
+    padding: 5px 15px;
+    margin: 10px 8px;
+    cursor: pointer;
+    &.selected {
+      color: white;
+      background-color: blue;
+    }
+  }
+}
