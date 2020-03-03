@@ -27,7 +27,6 @@ const Details = ({ match }) => {
   };
 
   React.useEffect(() => {
-    console.log("a");
     getDetails();
   }, [id]);
 
