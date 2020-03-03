@@ -9,14 +9,11 @@ const Details = ({ match }) => {
   // const { id } = useParams();
 
   const id = match && match.params && match.params.id;
-  console.log(id);
   const [details, setDetails] = React.useState();
   const [selected, setSelected] = React.useState({ theatre: "", timing: "" });
 
   const getDetails = async () => {
-    console.log("called");
     const response = await getMovieDetails(id);
-    console.log("called1");
     setDetails(response);
   };
 
