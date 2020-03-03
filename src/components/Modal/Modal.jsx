@@ -1,7 +1,7 @@
 import React from "react";
 import "./Modal.scss";
 
-const Modal = ({ theatre, movie, time, seats }) => {
+const Modal = ({ theatre, movie, time, seats, handleClose }) => {
   return (
     <div className="modal">
       <div className="backdrop"></div>
@@ -12,6 +12,11 @@ const Modal = ({ theatre, movie, time, seats }) => {
           <div className="content__item">Movie: {movie}</div>
           <div className="content__item">Time: {time}</div>
           <div className="content__item">Seats: {seats.join(",")}</div>
+        </div>
+        <div className="buttons">
+          <div className="confirm" onClick={handleClose}>
+            OK
+          </div>
         </div>
       </div>
     </div>

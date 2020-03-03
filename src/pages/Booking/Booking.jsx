@@ -12,6 +12,7 @@ const Booking = () => {
   const [details, setDetails] = React.useState();
   const [selected, setSelected] = React.useState([]);
   const [showConfirm, setShowConfirm] = React.useState(false);
+  const [booked, setBooked] = React.useState([]);
 
   const getDetails = async () => {
     const response = await getMovieDetails(id);
@@ -34,7 +35,13 @@ const Booking = () => {
   };
 
   const handleSubmit = () => {
-    setShowConfirm(!showConfirm);
+    setShowConfirm(true);
+  };
+
+  const closeModal = () => {
+    setShowConfirm(false);
+    setBooked([...booked, ...selected]);
+    setSelected([]);
   };
 
   return (
@@ -50,8 +57,8 @@ const Booking = () => {
               {numSeats.map((seat, i) => (
                 <Seat
                   num={i + 1}
-                  booked={i < 5}
-                  key={i}
+                  booked={booked.includes(i + 1)}
+                  key={i + 1}
                   handleSelect={handleSelect}
                 />
               ))}
@@ -89,6 +96,7 @@ const Booking = () => {
               movie={details.Title}
               time={slot}
               seats={selected}
+              handleClose={closeModal}
             />
           )}
         </div>

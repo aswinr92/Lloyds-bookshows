@@ -1,3 +1,4 @@
+@import "../../colors.scss";
 .modal {
   position: absolute;
   width: 100%;
@@ -19,5 +20,19 @@
     width: 100%;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.2);
+  }
+  .details {
+    padding: 0;
+  }
+  .buttons {
+    .confirm {
+      width: 30px;
+      margin: 0 auto;
+      padding: 6px;
+      background: $grey;
+      color: white;
+      text-align: center;
+      cursor: pointer;
+    }
   }
 }

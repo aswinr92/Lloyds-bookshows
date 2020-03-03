@@ -13,6 +13,12 @@
     padding-bottom: 5px;
     &__right {
       margin-left: 20px;
+      flex: 1;
+      min-width: 280px;
+    }
+    img {
+      flex: 1;
+      max-width: 250px;
     }
     &__title {
       font-size: 20px;
@@ -42,5 +48,24 @@
   }
   .actions {
     margin-top: 10px;
+  }
+
+  @media screen and (max-width: 600px) {
+    .meta {
+      &__right {
+        margin-left: 0;
+        margin-top: 20px;
+        // text-align: center;
+      }
+      &__content {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+
+        img {
+          margin: 0 auto;
+        }
+      }
+    }
   }
 }
