@@ -6,6 +6,7 @@ import fetchMock from "fetch-mock";
 import { detailsEndpoint } from "../../api-facade/endpoints";
 
 describe("Details Page", () => {
+  afterEach(fetchMock.restore);
   const a = {
     Title:
       "Birds of Prey: And the Fantabulous Emancipation of One Harley Quinn",
@@ -61,6 +62,32 @@ describe("Details Page", () => {
     component.update();
     fetchMock.done();
     expect(component.find("div.meta__title").text()).toEqual(a.Title);
+  });
+
+  it("should let you book movie", async () => {
+    fetchMock.get(`${detailsEndpoint}1`, a);
+
+    const component = mount(
+      <MockRouter>
+        <Details match={{ params: { id: "1" } }} />
+      </MockRouter>
+    );
+    await delay();
+    component.update();
+    fetchMock.done();
+    expect(component.find("a.select__button").hasClass("active")).toBe(false);
+    component
+      .find("div.accordion")
+      .at(0)
+      .find("div.icon")
+      .simulate("click");
+    await delay();
+    component.update();
+    component
+      .find("div.time__button")
+      .at(0)
+      .simulate("click");
+    expect(component.find("a.select__button").hasClass("active")).toBe(true);
   });
 });
 
