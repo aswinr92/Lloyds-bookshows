@@ -17,16 +17,20 @@ const Accordion = props => {
       setSelected(time);
     }
   };
+
+  const clickHandler = () => {
+    setExpanded(!expanded);
+    props.handleOpen(props.name);
+  };
   return (
     <div className="accordion">
-      <div className="icon">{expanded ? "-" : "+"}</div>
+      <div className="icon" onClick={clickHandler}>
+        {expanded ? "-" : "+"}
+      </div>
       <div>
         <div
           className={`title ${expanded ? "selected" : ""}`}
-          onClick={() => {
-            setExpanded(!expanded);
-            props.handleOpen(props.name);
-          }}
+          onClick={clickHandler}
         >
           {props.name}
         </div>
