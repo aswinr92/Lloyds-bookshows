@@ -30,6 +30,8 @@ const Details = ({ match }) => {
     getDetails();
   }, [id]);
 
+  // const
+
   return (
     <div className="details">
       {details && (
@@ -71,14 +73,24 @@ const Details = ({ match }) => {
               />
             ))}
             <div className="actions">
-              <Link
+              {selected.theatre && selected.timing ? (
+                <Link
+                  className="select__button cta__button active"
+                  to={`/theatre/${selected.theatre}/${id}/${selected.timing}`}
+                >
+                  Select Seats
+                </Link>
+              ) : (
+                <div className="select__button cta__button">Select Seats</div>
+              )}
+              {/* <Link
                 className={`select__button cta__button ${
                   selected.theatre && selected.timing ? "active" : ""
                 }`}
                 to={`/theatre/${selected.theatre}/${id}/${selected.timing}`}
               >
                 Select Seats
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
