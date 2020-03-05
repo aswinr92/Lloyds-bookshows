@@ -1,13 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Seat from "../../components/Seat";
 import Modal from "../../components/Modal";
-import { useParams } from "react-router-dom";
 import { getMovieDetails } from "../../api-facade";
 import "./Booking.scss";
 
 const Booking = () => {
   const numSeats = Array(20).fill(1);
-  let { id, name, slot } = useParams();
+
+  const id = useSelector(state => state.movie);
+  const name = useSelector(state => state.theatre);
+  const slot = useSelector(state => state.time);
 
   const [details, setDetails] = React.useState();
   const [selected, setSelected] = React.useState([]);

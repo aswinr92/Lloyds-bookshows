@@ -7,22 +7,32 @@ import Home from "./pages/Home/Home";
 import Details from "./pages/Details/Details";
 import Booking from "./pages/Booking/Booking";
 
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "./reducer";
+import { loadState, saveState } from "./localStorage";
+
+const persistedState = loadState();
+const store = createStore(reducer, persistedState);
+
+store.subscribe(() => {
+  saveState(store.getState());
+});
+
 function App() {
   return (
-    <Router>
-      <div className="App">
-        <Header></Header>
-        <Switch>
-          <Route component={Home} exact={true} path="/" />
-          <Route component={Details} exact={true} path="/movie/:id" />
-          <Route
-            component={Booking}
-            exact={true}
-            path="/theatre/:name/:id/:slot"
-          />
-        </Switch>
-      </div>
-    </Router>
+    <Provider store={store}>
+      <Router>
+        <div className="App">
+          <Header></Header>
+          <Switch>
+            <Route component={Home} exact={true} path="/" />
+            <Route component={Details} exact={true} path="/movie/:id" />
+            <Route component={Booking} exact={true} path="/book" />
+          </Switch>
+        </div>
+      </Router>
+    </Provider>
   );
 }
 

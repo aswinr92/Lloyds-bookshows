@@ -1,16 +1,19 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import { getMovieDetails } from "../../api-facade";
 import theatres from "../../data/theatres.json";
 import "./Details.scss";
 import Accordion from "../../components/Accordion";
 
-const Details = ({ match }) => {
-  // const { id } = useParams();
-
-  const id = match && match.params && match.params.id;
+const Details = () => {
   const [details, setDetails] = React.useState();
-  const [selected, setSelected] = React.useState({ theatre: "", timing: "" });
+
+  const dispatch = useDispatch();
+  const id = useSelector(state => state.movie);
+  const theatre = useSelector(state => state.theatre);
+  const time = useSelector(state => state.time);
 
   const getDetails = async () => {
     const response = await getMovieDetails(id);
@@ -18,19 +21,17 @@ const Details = ({ match }) => {
   };
 
   const handleOpen = t => {
-    setSelected({ theatre: t });
+    dispatch({ type: "SELECT_THEATRE", payload: t });
   };
 
   const handleSelect = t => {
-    const s = selected.timing === t ? false : t;
-    setSelected({ ...selected, timing: s });
+    const s = time === t ? false : t;
+    dispatch({ type: "SELECT_TIME", payload: s });
   };
 
   React.useEffect(() => {
     getDetails();
   }, [id]);
-
-  // const
 
   return (
     <div className="details">
@@ -68,29 +69,21 @@ const Details = ({ match }) => {
               <Accordion
                 {...t}
                 handleOpen={handleOpen}
-                open={t.name === selected.theatre}
+                open={t.name === theatre}
                 handleSelect={handleSelect}
               />
             ))}
             <div className="actions">
-              {selected.theatre && selected.timing ? (
+              {theatre && time ? (
                 <Link
                   className="select__button cta__button active"
-                  to={`/theatre/${selected.theatre}/${id}/${selected.timing}`}
+                  to={`/book`}
                 >
                   Select Seats
                 </Link>
               ) : (
                 <div className="select__button cta__button">Select Seats</div>
               )}
-              {/* <Link
-                className={`select__button cta__button ${
-                  selected.theatre && selected.timing ? "active" : ""
-                }`}
-                to={`/theatre/${selected.theatre}/${id}/${selected.timing}`}
-              >
-                Select Seats
-              </Link> */}
             </div>
           </div>
         </div>

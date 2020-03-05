@@ -4,6 +4,9 @@ import { HashRouter as MockRouter } from "react-router-dom";
 import Details from "./Details";
 import fetchMock from "fetch-mock";
 import { detailsEndpoint } from "../../api-facade/endpoints";
+import { Provider } from "react-redux";
+import { createStore } from "redux";
+import reducer from "../../reducer";
 
 describe("Details Page", () => {
   afterEach(fetchMock.restore);
@@ -42,11 +45,18 @@ describe("Details Page", () => {
     Website: "N/A",
     Response: "True"
   };
+  const store = createStore(reducer, {
+    movie: "1",
+    theatre: "",
+    time: ""
+  });
   it("should render the component", () => {
     const component = mount(
-      <MockRouter>
-        <Details />
-      </MockRouter>
+      <Provider store={store}>
+        <MockRouter>
+          <Details />
+        </MockRouter>
+      </Provider>
     );
     expect(component).toMatchSnapshot();
   });
@@ -54,9 +64,11 @@ describe("Details Page", () => {
     fetchMock.get(`${detailsEndpoint}1`, a);
 
     const component = mount(
-      <MockRouter>
-        <Details match={{ params: { id: "1" } }} />
-      </MockRouter>
+      <Provider store={store}>
+        <MockRouter>
+          <Details />
+        </MockRouter>
+      </Provider>
     );
     await delay();
     component.update();
@@ -68,14 +80,16 @@ describe("Details Page", () => {
     fetchMock.get(`${detailsEndpoint}1`, a);
 
     const component = mount(
-      <MockRouter>
-        <Details match={{ params: { id: "1" } }} />
-      </MockRouter>
+      <Provider store={store}>
+        <MockRouter>
+          <Details />
+        </MockRouter>
+      </Provider>
     );
     await delay();
     component.update();
     fetchMock.done();
-    expect(component.find("a.select__button").hasClass("active")).toBe(false);
+    expect(component.find("div.select__button").hasClass("active")).toBe(false);
     component
       .find("div.accordion")
       .at(0)
